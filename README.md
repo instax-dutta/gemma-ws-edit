@@ -28,6 +28,26 @@ We scaled the attention output projection weights of selected heads by a factor 
 
 **Result:** A small gain on GSM8K (+0.15 percentage points flexible), no change on MATH-500. This is a first pass; more targeted weight surgery (ROME-style MLP edits, circuit analysis, task vectors) is planned next.
 
+## Results Visualization
+
+### Baseline vs Weight-Edited
+
+![Baseline vs Edited](assets/charts/baseline_vs_edited.png)
+
+### MATH-500 by Subject
+
+![MATH-500 by Subject](assets/charts/math500_by_subject.png)
+
+### MATH-500 by Difficulty Level
+
+![MATH-500 by Level](assets/charts/math500_by_level.png)
+
+### Summary Dashboard
+
+![Summary Dashboard](assets/charts/summary_dashboard.png)
+
+All charts are generated from the result data in `charts/data/` using `charts/generate_charts.py`. Both PNG and SVG versions are available in `assets/charts/`.
+
 ## Techniques we're exploring
 
 1. **Attention head amplification** -- Scale output projection weights of math-relevant attention heads. Low risk, fully reversible.
@@ -50,7 +70,13 @@ gemma-ws-edit/
 │   ├── run_bench.py    # Runs lm-eval benchmarks (GSM8K, MATH-500)
 │   ├── quick_eval.py   # Quick local sanity check on a few problems
 │   └── AGENTS.md       # Scripts directory context
-├── results/            # Evaluation outputs (JSON, JSONL samples)
+├── charts/            # Chart data (CSV) + generation script
+│   ├── data/          # CSV data files for charts
+│   ├── generate_charts.py  # Matplotlib chart generator
+│   └── AGENTS.md      # Charts directory context
+├── assets/            # Generated visual assets
+│   └── charts/        # PNG + SVG charts (embedded in README)
+├── results/           # Evaluation outputs (JSON, JSONL samples)
 │   ├── google__gemma-3-270m/   # Baseline results
 │   └── AGENTS.md       # Results directory context
 ├── logs/               # Runtime execution logs

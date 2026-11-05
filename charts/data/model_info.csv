@@ -1,0 +1,2 @@
+model,model_name,parameters,dtype,size_gb,num_gpus,gpu_type,total_eval_time_seconds
+gemma-3-270m,google/gemma-3-270m,268098176,float32,1.0,2,Tesla T4,3193.27
