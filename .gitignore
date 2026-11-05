@@ -1,0 +1,45 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+.venv/
+env/
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Virtual environments
+.venv/
+
+# Model checkpoints and caches (do not commit large model files)
+models/*.safetensors
+models/*.bin
+models/*.pt
+models/gemma-3-270m-*/
+*.gguf
+*.safetensors
+
+# HuggingFace cache
+.cache/huggingface/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs (keep directory but ignore runtime logs)
+logs/*.log
+
+# Results raw output
+results/**/*.json
+results/**/*.jsonl
+
+# Freebuff
+.freebuff/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
