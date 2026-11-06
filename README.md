@@ -1,5 +1,7 @@
 # gemma-ws-edit
 
+> **Best checkpoint on Hugging Face:** [`saidutta69/gemma-3-270m-math-rome-best`](https://huggingface.co/saidutta69/gemma-3-270m-math-rome-best) — publication-style model card with full tables + figures. Code + logs here in `instax-dutta/gemma-ws-edit` on GitHub; weights live on HF.
+
 Direct weight-space editing for Gemma 3 270M math reasoning -- no finetuning, no retraining.
 
 ## What this project does
