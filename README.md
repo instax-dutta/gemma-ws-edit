@@ -14,25 +14,38 @@ Fine-tuning a 270M model on math data requires compute, time, and labeled data. 
 
 ## What we tried and what happened
 
-| Approach | GSM8K (flexible) | GSM8K (strict) | MATH-500 | Change vs baseline |
-|----------|-----------------|----------------|----------|-------------------|
-| Baseline (original Gemma 3 270M) | 1.82% | 1.14% | 0.20% | -- |
-| Head amplification (first pass) | 1.97% | 1.21% | 0.20% | +0.15pp GSM8K, 0 MATH-500 |
+MPS-only comparisons (float32, batch 4, identical lm-eval). T4 numbers were reference only.
 
-### Baseline
-- **GSM8K (Chain-of-Thought, CPU server)**: exact_match = 0.0182 ± 0.0037 (1.82%), strict = 0.0114 ± 0.0029 (1.14%)
-- **MATH-500 (single Tesla T4)**: exact_match = 0.002 ± 0.002 (0.2%)
+| Approach | GSM8K (flexible) | GSM8K (strict) | MATH-500 | Correct /1319 |
+|----------|-----------------|----------------|----------|---------------|
+| Baseline MPS | 1.82% | 1.14% | 0.20% | 24 |
+| v2 Head all (T4 first pass) | 1.82% | 1.14% | 0.20% | 24 |
+| **v3 MLP mid 6-12 α=1.5 = best published** | **2.05%** | **1.36%** | **0.20%** | **27** |
+| v4 Head+MLP | 2.05% | 1.36% | 0.20% | 27 |
+| v5 MLP α2.0 | 2.05% | 1.36% | 0.20% | 27 |
+| v6 MLP α2.5 | 2.05% | 1.29% | 0.20% | 27 |
+| v7 MLP late 9-17 | 1.59% | 1.14% | 0.20% | 21 |
+| v8 ROME rank-1 | 1.59% | 1.14% | 0% | 21 |
+| v9 Task-vector 0.2 | 1.82% | 1.44% | 0% | 24 |
 
-### First pass: attention head amplification
-We scaled the attention output projection weights of selected heads by a factor α > 1 (1.1–2.0). This was the fastest, most reversible approach -- pure weight scaling, no gradients.
+### Baseline MPS
+- **GSM8K CoT**: exact_match flexible 0.0182 ± 0.0037 (24/1319), strict 0.0114 ± 0.0029 (15/1319)
+- **MATH-500**: 0.002 ± 0.002 (1/500, 0-shot)
+- Full JSONs in `results/full_baseline_local/`
 
-**Result:** A small gain on GSM8K (+0.15 percentage points flexible), no change on MATH-500. This is a first pass; more targeted weight surgery (ROME-style MLP edits, circuit analysis, task vectors) is planned next.
+### Best published
+- `saidutta69/gemma-3-270m-math-rome-best` = v3 MLP layers 6-12 α=1.5 (down_proj 640x2048 x7 = 9.17M params, 3.4% changed)
+- Gain +3 correct (27 vs 24), below significance bar of 34 (baseline +2*stderr). Honestly reported, MATH-500 flat.
+
+Full sweep figures in `assets/charts/` including `mps_sweep_all.png` for all 9 runs.
 
 ## Results Visualization
 
 ### Baseline vs Weight-Edited
 
 ![Baseline vs Edited](assets/charts/baseline_vs_edited.png)
+
+![MPS Sweep All Runs](assets/charts/mps_sweep_all.png)
 
 ### MATH-500 by Subject
 

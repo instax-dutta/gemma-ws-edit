@@ -1,0 +1,10 @@
+run,edit,alpha,layers,GSM_flexible,GSM_strict,MATH500
+baseline,none,-,-,0.0182,0.0114,0.0020
+v2_head_amplify,head-all,1.5,all,0.0182,0.0114,0.0020
+v3_rome_mlp,mlp-mid,1.5,6-12,0.0205,0.0136,0.0020
+v4_both,head+mlp,1.5,6-12,0.0205,0.0136,0.0020
+v5_rome_a20,mlp-mid,2.0,6-12,0.0205,0.0136,0.0020
+v6_rome_a25,mlp-mid,2.5,6-12,0.0205,0.0129,0.0020
+v7_late,mlp-late,1.5,9-17,0.0159,0.0114,0.0020
+v8_rank1,rank1-facts,0.3,6-12,0.0159,0.0114,0.0000
+v9_taskvec,task-vector,0.2,all,0.0182,0.0144,0.0000

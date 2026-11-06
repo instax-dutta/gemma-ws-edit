@@ -1,4 +1,4 @@
 benchmark,task,metric,baseline,edited,baseline_stderr,edited_stderr
-GSM8K,gsm8k_cot,exact_match_flexible,0.0182,0.0197,0.0037,0.0038
-GSM8K,gsm8k_cot,exact_match_strict,0.0114,0.0121,0.0029,0.0030
+GSM8K,gsm8k_cot,exact_match_flexible,0.0182,0.0205,0.0037,0.0039
+GSM8K,gsm8k_cot,exact_match_strict,0.0114,0.0136,0.0029,0.0032
 MATH-500,hendrycks_math500,exact_match,0.0020,0.0020,0.0020,0.0020
